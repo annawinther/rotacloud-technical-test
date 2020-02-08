@@ -34,21 +34,17 @@ class App extends React.Component {
         let users = userRes.data;
         let rolesAxios = rolesRes.data;
         
-         Object.keys(users).forEach(function(key) {
-          let users1 = users[key];
-          const array = users1.roles;
+        let filteredUsers = users.filter(user => { return user.roles !== null}); // remove users which do not have a role
 
-          if (array) {
-            let yo = array.map(role => {
-              let roleID = role
-              let test = rolesAxios.find(role => role.id === roleID);
-              let roleName = test.name;
-               return roleName
-              })
-            users1.roles = yo;
-          }
-          return users1
-        })
+        for (let i = 0; i < filteredUsers.length; i++){
+          let namedRoles = filteredUsers[i].roles.map(role => {
+              let roleIdFromUserAxios = role
+              let userInfo = rolesAxios.find(roleFromRoles => roleFromRoles.id === roleIdFromUserAxios);
+              let roleName = userInfo.name;
+              return roleName
+          })
+          filteredUsers[i].roles = namedRoles;
+        }
         this.setState({ users: users })
       }))
     }
@@ -63,7 +59,7 @@ getRoles() {
       let usersAxios = userRes.data;
       let rolesAxios = rolesRes.data;
 
-      let filteredUsers = usersAxios.filter(function(el) { return el.roles != null}); // remove users which do not have a role
+      let filteredUsers = usersAxios.filter(role => { return role.roles !== null}); // remove users which do not have a role
 
       for (var i = 0; i < rolesAxios.length; i++) {
           var matchedUsers = filteredUsers.filter(users => users.roles.includes(rolesAxios[i].id)); // match users with role ID
@@ -76,8 +72,6 @@ getRoles() {
 
 
   render() {
-    console.log('userState', this.state.users)
-    console.log('roleState', this.state.roles)
     return (
       <div>
         <h1 onClick={this.findRolebyUser}>Hello</h1>
