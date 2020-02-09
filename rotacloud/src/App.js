@@ -74,7 +74,7 @@ getRoles() {
           var sortOrder = 1;
           if(property[0] === "-") {
               sortOrder = -1;
-              property = property.substr(1);
+              property = property.substr(1); // returns a portion of the string, starting at the specified index and extending for a given number of characters afterward
           }
           return function (a,b) {
               /* next line works with strings and numbers, 
@@ -85,7 +85,7 @@ getRoles() {
           }
       }
 
-    
+      rolesAxios.sort(dynamicSort('name'));
       this.setState({roles: rolesAxios});
   }));
 }
@@ -93,6 +93,7 @@ getRoles() {
 
   render() {
     console.log('users', this.state.users)
+    console.log('roles', this.state.roles)
     return (
       <div>
         <h1 onClick={this.findRolebyUser}>Hello</h1>
