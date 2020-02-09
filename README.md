@@ -1,4 +1,4 @@
-# rotacloud-test
+# rotacloud-technical-test
 
 Technical test for RotaCloud, which I chose to do in React.
 
