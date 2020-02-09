@@ -31,10 +31,10 @@ class App extends React.Component {
       axios.get(rolesAPI)
     ])
       .then(axios.spread((userRes, rolesRes) => {
-        let users = userRes.data;
+        let usersAxios = userRes.data;
         let rolesAxios = rolesRes.data;
         
-        let filteredUsers = users.filter(user => { return user.roles !== null}); // remove users which do not have a role
+        let filteredUsers = usersAxios.filter(user => { return user.roles !== null}); // remove users which do not have a role
 
         for (let i = 0; i < filteredUsers.length; i++){ //lopps over the filteredUsers
           let namedRoles = filteredUsers[i].roles.map(role => { // takes the role array inside of the filtered users and maps over it to get each role id of the user
@@ -47,7 +47,22 @@ class App extends React.Component {
           let sortRoles = filteredUsers[i].roles;
           sortRoles.sort();
         }
-        this.setState({ users: users })
+        function dynamicSort(property) {
+          var sortOrder = 1;
+          if(property[0] === "-") {
+              sortOrder = -1;
+              property = property.substr(1); // returns a portion of the string, starting at the specified index and extending for a given number of characters afterward
+          }
+          return function (a,b) {
+              /* next line works with strings and numbers, 
+               * and you may want to customize it to your needs
+               */
+              var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+              return result * sortOrder;
+          }
+        }
+        usersAxios.sort(dynamicSort('name'))
+        this.setState({ users: usersAxios })
       }))
     }
 
