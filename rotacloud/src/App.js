@@ -7,6 +7,7 @@ import Navigation from './navigation/Navigation';
 import { Route } from 'react-router';
 
 import './App.css';
+import Home from './navigation/Home';
 
 const usersApi = 'https://custom.rotacloud.com/angular-challenge/users.json';
 const rolesAPI = 'https://custom.rotacloud.com/angular-challenge/roles.json';
@@ -115,6 +116,7 @@ getRoles() {
     return (
       <section id="rc-main">
         <Navigation />
+        <Route exact path='/' component={Home}/>
         <div className="tables">
         <Route path='/users'>
           {/* pass the updated users state to the Users component to render it */}
