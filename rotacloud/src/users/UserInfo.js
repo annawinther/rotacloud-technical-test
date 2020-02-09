@@ -1,12 +1,26 @@
 import React from 'react'
-import {UserNameCol} from './UserNameCol'
 
 export default function UserInfo(props) {
-    const {user} = props
-    // console.log("user", user)
+    // const {user} = props
+    const { name, id, roles } = props.user;
     return (
-      <div>
-          <UserNameCol user={user} />
-      </div>
+         <tr>
+            <td>{id}</td>
+            <td><input type="text" value={name} onChange={() => {}}/></td>
+            <td>
+                {roles ? (
+                  roles.map((role, idx) => {
+                      const style = {
+                          backgroundColor: role.roleColor,
+                      }
+                    return (
+                        <div className="tag" key={idx} style={style}>
+                            {role.roleName} 
+                        </div>
+                    )
+                  })) : (<div> </div>)
+                }
+            </td>
+        </tr>
     )
 }

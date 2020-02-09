@@ -3,18 +3,20 @@ import RolesInfo from './RolesInfo';
 
 export default class Roles extends Component {
     render() {
-        // console.log('props', this.props)
         return (
             <table>
                 <thead>
+                <tr>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Users</th>
+                    </tr>
                 </thead>
-                {this.props.roles.map(role => {
-                    
-                    return <RolesInfo key={role.id} role={role}/>
-                })}
+                <tbody>
+                    {this.props.roles.map(role => {
+                        return <RolesInfo key={role.id} role={role}/>
+                    })}
+                </tbody>
             </table>
         )
     }

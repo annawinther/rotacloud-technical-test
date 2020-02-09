@@ -3,17 +3,22 @@ import UserInfo from './UserInfo';
 
 export default class Users extends Component {
     render() {
+        // console.log(this.props)
         return (
             <table>
                 <thead>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Roles</th>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Roles</th>
+                    </tr>
                 </thead>
-                {this.props.users.map(user => {
-                    const header = Object.keys(user)
-                    return <UserInfo key={user.id} header={header} user={user}/>
-                })}
+                <tbody>
+                    {this.props.users.map((user, role) => {
+                        const header = Object.keys(user)
+                        return <UserInfo key={user.id} header={header} user={user} />
+                    })}
+                </tbody>
             </table>
         )
     }
