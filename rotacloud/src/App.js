@@ -7,6 +7,7 @@ import Navigation from './navigation/Navigation';
 import { Route } from 'react-router';
 
 import './App.css';
+import Home from './navigation/Home';
 
 const usersApi = 'https://custom.rotacloud.com/angular-challenge/users.json';
 const rolesAPI = 'https://custom.rotacloud.com/angular-challenge/roles.json';
@@ -36,7 +37,7 @@ class App extends React.Component {
         let rolesAxios = rolesRes.data; 
         let filteredUsers = usersAxios.filter(user => { return user.roles !== null }); // remove users which do not have a role
 
-      // loops over the filteredUsers and takes the role array inside of the filtered users and maps over it to get each role id of the user. It then matches the role id of the user with the role id from the rolesAxios data and modifies the data to include the name of the role and the colour as key value pairs. Returns the modified data and sorts it in order as requested.
+      // loops over the filteredUsers and takes the role array inside of the filteredUsers and maps over it to get each role id from the user. It then matches the role id of the user with the role id from the rolesAxios data and modifies the data to include the name of the role and the colour of the role as key value pairs of filteredUsers. Returns the modified data and sorts it in order as requested.
 
        for (let i = 0; i < filteredUsers.length; i++){ 
           let rolesInfo = filteredUsers[i].roles.map(role => { 
@@ -46,12 +47,13 @@ class App extends React.Component {
 
               return roleNameAndColour
           })
-          filteredUsers[i].roles = rolesInfo; // rolesInfo is an  array eg: [ foh, reception ]
+          // rolesInfo is an array of objects eg: [ {roleName: "FOH", roleColor: "#6798d0"} ]
+          filteredUsers[i].roles = rolesInfo; 
           let sortRoles = filteredUsers[i].roles;
           sortRoles.sort(dynamicSort("roleName"));
         }
 
-        // function to dynamically sort the array. Takes the proprety of the object you want to sort.
+        // function to dynamically sort the array. Takes the proprety key in the object you want to sort and sorts the vlaues in the selected key.
         function dynamicSort(property) {
           let sortOrder = 1;
           if(property[0] === "-") {
@@ -83,10 +85,10 @@ getRoles() {
 
       const filteredUsers = usersAxios.filter(role => { return role.roles !== null}); // remove users which do not have a role
 
-      // loops over the filteredUsers and checks and matches the users with the role id from the rolesAxios data to filter out the users who have the respective role. Then adds a new property yo the rolesAxios data called users containing an array of users with that role. Then sorts the function to sort the name of the role in order as requested.
+      // loops over the filteredUsers and checks and matches the users with the role id from the rolesAxios data. This filters out the users who have the matched role. It then adds a new property to the rolesAxios data called 'users', containing an array of users with that role. Then sorts the name of the role in order as requested.
 
       for (let i = 0; i < rolesAxios.length; i++) {
-          const matchedUsers = filteredUsers.filter(users => users.roles.includes(rolesAxios[i].id)); // match users with role ID
+          const matchedUsers = filteredUsers.filter(users => users.roles.includes(rolesAxios[i].id)); 
           rolesAxios[i].users = matchedUsers;
 
           let sortUsers = rolesAxios[i].users;
@@ -115,6 +117,7 @@ getRoles() {
     return (
       <section id="rc-main">
         <Navigation />
+        <Route exact path='/' component={Home}/>
         <div className="tables">
         <Route path='/users'>
           {/* pass the updated users state to the Users component to render it */}
