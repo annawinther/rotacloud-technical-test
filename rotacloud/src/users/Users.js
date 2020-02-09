@@ -3,7 +3,6 @@ import UserInfo from './UserInfo';
 
 export default class Users extends Component {
     render() {
-        // console.log(this.props)
         return (
             <table>
                 <thead>
@@ -14,7 +13,8 @@ export default class Users extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.props.users.map((user, role) => {
+                    {/* looping over the users data coming from the props and render each one inside UsersInfo component passing in the whole user object*/}
+                    {this.props.users.map((user) => {
                         const header = Object.keys(user)
                         return <UserInfo key={user.id} header={header} user={user} />
                     })}

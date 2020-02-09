@@ -13,6 +13,7 @@ export default class Roles extends Component {
                     </tr>
                 </thead>
                 <tbody>
+              {/* looping over the roles data coming from the props and render each one inside RolesInfo component passing in the whole role object */}
                     {this.props.roles.map(role => {
                         return <RolesInfo key={role.id} role={role}/>
                     })}

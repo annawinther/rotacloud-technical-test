@@ -5,6 +5,7 @@ export default function RolesInfo(props) {
     var style = {
       color: colour,
     };
+
   return (
         <tr>
           <td>{id}</td>
@@ -21,26 +22,3 @@ export default function RolesInfo(props) {
       </tr>
   )
 }
-
-
-//  function RolesNameCol(props) {
-//   const { name, id, colour, users } = props.role;
-//   var style = {
-//       color: colour,
-//     };
-//   return (
-//           <tr>
-//           <td>{id}</td>
-//           <td><input type="text" value={name} style={style}/></td>
-//           <td>
-//             {users.map(user => {
-//                   return (
-//                         <div className="tag">
-//                         {user.name}
-//                         </div>
-//                   )
-//               })}
-//               </td>
-//         </tr>
-//   )
-// }
