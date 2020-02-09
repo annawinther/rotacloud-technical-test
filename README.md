@@ -1,6 +1,6 @@
 # rotacloud-technical-test
 
-Technical test for RotaCloud, which I chose to do in React, using the given project as example for design.
+Technical test for RotaCloud, which I chose to do in React, using the given Angular project as example for design.
 
 # Getting Started
 
