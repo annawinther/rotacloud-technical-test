@@ -7,7 +7,7 @@ export default function Home() {
             <h1>The Challenge</h1>
 
             <p>
-                Thank you for taking the RotaCloud Angular challenge!
+                Thank you for taking the RotaCloud <i>React</i> challenge!
             </p>
 
             <p>
